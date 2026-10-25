@@ -23,6 +23,7 @@ for name, content in cases.items(): (inputs/name).write_text(content, encoding='
 base = '/user/' + os.environ['USER'] + '/lab2/' + folder.name
 def run(*args, **kw):
     return subprocess.run(args, check=True, text=True, **kw)
+run('hdfs','dfsadmin','-safemode','wait')
 run('hdfs','dfs','-mkdir','-p',base+'/input',base+'/config')
 run('hdfs','dfs','-put',*[str(p) for p in sorted(inputs.glob('*.txt'))],base+'/input/')
 run('hdfs','dfs','-put','stopwords.txt',base+'/config/')

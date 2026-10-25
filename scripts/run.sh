@@ -3,6 +3,7 @@ set -euo pipefail
 cd "$(dirname "$0")/.."
 if [[ -f "$HOME/hadoop-lab/env.sh" ]]; then source "$HOME/hadoop-lab/env.sh"; fi
 bash build.sh
+hdfs dfsadmin -safemode wait
 [[ $(find data/input -maxdepth 1 -name '*.txt' | wc -l) -ge 10 ]] || { echo 'Download at least 10 documents first'; exit 1; }
 RUN="$(date -u +%Y%m%dT%H%M%SZ)-$$"
 BASE="/user/$(id -un)/lab2/$RUN"
